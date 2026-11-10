@@ -62,7 +62,5 @@ const { navItems, settingsItems } = useMenuSidebar()
       </div>
     </div>
 
-    <!-- Bottom Widget Saldo -->
-
   </aside>
 </template>

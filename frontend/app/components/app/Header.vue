@@ -38,7 +38,7 @@ const dropdownItems: DropdownMenuItem[][] = [
     <div class="flex items-center gap-4">
       <UDropdownMenu :items="dropdownItems" :content="{ align: 'end', side: 'bottom' }">
         <UButton color="neutral" variant="ghost" class="flex items-center gap-2.5">
-          <UAvatar :text="userInitial" size="sm" class="bg-primary-800 font-semibold text-white dark:bg-primary-800" />
+          <UAvatar :text="userInitial" size="sm" class="bg-primary-600 font-bold text-white dark:bg-primary-500" />
 
           <span class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
             {{ userName }}
