@@ -29,16 +29,9 @@ Jalankan perintah:
 ```bash
 composer install
 ```
-
-Perintah ini digunakan untuk menginstal seluruh dependency atau library PHP yang dibutuhkan oleh aplikasi Laravel berdasarkan konfigurasi `composer.json` dan `composer.lock`.
-
-Jika ingin memperbarui dependency ke versi terbaru yang masih sesuai dengan batasan versi di `composer.json`, gunakan:
-
 ```bash
 composer update
 ```
-
-**Catatan:** Untuk menjalankan project yang sudah tersedia, disarankan menggunakan `composer install` agar versi dependency tetap konsisten dengan `composer.lock`.
 
 ### 2.3 Konfigurasi Environment
 
@@ -85,19 +78,11 @@ Jalankan perintah:
 php artisan serve
 ```
 
-Secara default, Laravel akan berjalan pada alamat:
-
 ```text
 http://127.0.0.1:8000
 ```
 
-Perintah ini menjalankan development server Laravel yang menangani HTTP request dari frontend maupun aplikasi lainnya.
-
 ## 3. Menjalankan WebSocket dengan Laravel Reverb
-
-Aplikasi menggunakan Laravel Reverb sebagai server WebSocket untuk komunikasi real-time antara backend dan frontend.
-
-Jalankan perintah berikut pada terminal baru:
 
 ```bash
 php artisan reverb:start
@@ -139,13 +124,6 @@ Jalankan perintah berikut pada terminal baru:
 ```bash
 php artisan schedule:work
 ```
-
-Perintah ini menjalankan Laravel Scheduler untuk memproses tugas-tugas terjadwal yang sudah didefinisikan pada aplikasi.
-
-Pada aplikasi Signage Control Panel, scheduler digunakan untuk menjalankan proses pemeriksaan status device, termasuk mendeteksi device yang sudah tidak mengirimkan heartbeat dan memperbarui statusnya menjadi `offline`.
-
-Ketika status device berubah, backend dapat mengirimkan event melalui Laravel Reverb agar dashboard menerima perubahan tersebut secara real-time.
-
 **Penting:** Scheduler dan WebSocket memiliki fungsi yang berbeda:
 
 - Laravel Scheduler bertanggung jawab menjalankan pemeriksaan dan tugas terjadwal.
@@ -188,37 +166,6 @@ Ketiga proses tersebut harus tetap berjalan selama aplikasi sedang digunakan dal
 | `php artisan serve` | Menjalankan HTTP server Laravel |
 | `php artisan reverb:start` | Menjalankan server WebSocket |
 | `php artisan schedule:work` | Menjalankan Laravel Scheduler |
-
-## 7. Alur Komunikasi Aplikasi
-
-```text
-       DEVICE CLIENT
-             |
-             | Heartbeat (HTTP POST)
-             v
-       LARAVEL BACKEND
-             |
-             | Update Device Status
-             v
-       POSTGRESQL DATABASE
-             |
-             v
-       LARAVEL BACKEND
-             |
-             | Broadcast Event
-             v
-       LARAVEL REVERB
-             |
-             | WebSocket
-             v
-       FRONTEND DASHBOARD
-             |
-             v
-       UPDATE STATUS DEVICE
-          ONLINE / OFFLINE
-```
-
-Laravel Scheduler bertugas memeriksa device yang tidak lagi mengirimkan heartbeat. Ketika status berubah, backend mengirimkan event melalui Reverb agar frontend dapat memperbarui tampilan dashboard.
 
 ---
 

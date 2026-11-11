@@ -4,15 +4,15 @@
 
 Frontend aplikasi Signage Control Panel menggunakan teknologi berikut:
 
-| Teknologi | Keterangan |
-|---|---|
-| Nuxt.js | Framework frontend berbasis Vue.js |
-| TypeScript | Bahasa pemrograman dengan static typing |
-| Vue.js | Framework untuk membangun antarmuka pengguna |
-| Nuxt UI | Component UI untuk membangun tampilan aplikasi |
-| Bun | JavaScript runtime dan package manager |
-| Laravel REST API | Komunikasi data dengan backend |
-| Laravel Reverb | WebSocket untuk komunikasi real-time |
+| Teknologi        | Keterangan |
+|------------------|------------------------------------------------|
+| Nuxt.js          | Framework frontend berbasis Vue.js             |
+| TypeScript       | Bahasa pemrograman dengan static typing        |
+| Vue.js           | Framework untuk membangun antarmuka pengguna   |
+| Nuxt UI          | Component UI untuk membangun tampilan aplikasi |
+| Bun              | JavaScript runtime dan package manager         |
+| Laravel REST API | Komunikasi data dengan backend                 |
+| Laravel Reverb   | WebSocket untuk komunikasi real-time           |
 
 ## 2. Menjalankan Frontend (Development)
 
@@ -21,19 +21,12 @@ Frontend aplikasi Signage Control Panel menggunakan teknologi berikut:
 ```bash
 cd frontend
 ```
-
-Sesuaikan nama direktori dengan struktur project yang digunakan.
-
 ### 2.2 Install Dependency
-
-Aplikasi menggunakan Bun sebagai package manager.
-
 Jalankan perintah:
 
 ```bash
 bun install
 ```
-
 Perintah ini digunakan untuk menginstal seluruh dependency yang dibutuhkan oleh aplikasi berdasarkan file `package.json` dan `bun.lock`.
 
 ### 2.3 Konfigurasi Environment (.env)
@@ -62,13 +55,9 @@ NUXT_PUBLIC_REVERB_SCHEME=http
 ### Penjelasan Konfigurasi
 
 #### A. API Backend
-
-| Variabel | Fungsi |
-|---|---|
 | `NUXT_PUBLIC_API_BASE` | Alamat REST API Laravel yang digunakan frontend untuk mengambil dan mengirim data |
 
 Contoh:
-
 ```env
 NUXT_PUBLIC_API_BASE=http://127.0.0.1:8000/api/v1
 ```
@@ -76,9 +65,6 @@ NUXT_PUBLIC_API_BASE=http://127.0.0.1:8000/api/v1
 Frontend menggunakan alamat tersebut untuk melakukan request ke endpoint backend, seperti autentikasi, pengelolaan device, dan pengambilan data konten.
 
 #### B. WebSocket Reverb
-
-| Variabel | Fungsi |
-|---|---|
 | `NUXT_PUBLIC_REVERB_APP_KEY` | Application key untuk koneksi Reverb |
 | `NUXT_PUBLIC_REVERB_HOST` | Host server WebSocket |
 | `NUXT_PUBLIC_REVERB_PORT` | Port server WebSocket |
@@ -172,9 +158,6 @@ bun run dev
 ```
 
 ### C. Alamat Aplikasi
-
-| Layanan | Alamat |
-|---|---|
 | Frontend | http://localhost:3000 |
 | Backend API | http://127.0.0.1:8000 |
 | WebSocket | 127.0.0.1:8080 |
@@ -206,27 +189,6 @@ bun run preview
 | `bun run build` | Membuat production build |
 | `bun run preview` | Menjalankan preview hasil build |
 
-## 8. Alur Komunikasi Frontend
-
-```text
-             FRONTEND
-           NUXT.JS + TS
-                 |
-         +-------+-------+
-         |               |
-         v               v
-      REST API        WEBSOCKET
-         |               |
-         v               v
-    LARAVEL API      LARAVEL REVERB
-         |               ^
-         v               |
-     POSTGRESQL       BROADCAST EVENT
-         ^
-         |
-     DEVICE CLIENT
-      HEARTBEAT
-```
 
 Frontend menggunakan REST API untuk mengambil dan mengelola data aplikasi, sedangkan WebSocket digunakan untuk menerima perubahan status device secara real-time.
 
