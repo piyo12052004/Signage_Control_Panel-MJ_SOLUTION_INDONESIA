@@ -70,7 +70,43 @@ Untuk membuat tabel database sesuai migration Laravel:
 php artisan migrate
 ```
 
-### 2.5 Menjalankan Laravel Backend
+### 2.5 Membuat Storage Link
+
+Aplikasi menggunakan Laravel Storage untuk menyimpan file content seperti gambar dan video.
+
+Jalankan perintah berikut untuk membuat symbolic link:
+
+```bash
+php artisan storage:link
+```
+
+Perintah tersebut menghubungkan direktori:
+
+```text
+storage/app/public/
+```
+
+ke:
+
+```text
+public/storage/
+```
+
+Dengan demikian, file yang disimpan pada:
+
+```text
+storage/app/public/contents/
+```
+
+dapat diakses melalui URL:
+
+```text
+http://127.0.0.1:8000/storage/contents/nama-file.jpg
+```
+
+**Catatan:** Perintah `php artisan storage:link` cukup dijalankan satu kali setelah instalasi atau ketika symbolic link belum tersedia.
+
+### 2.6 Menjalankan Laravel Backend
 
 Jalankan perintah:
 
